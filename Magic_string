@@ -1,0 +1,41 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+#define M 1000000007
+#define ll long long int
+ll po(ll x,ll n)
+{
+    if(n==0)
+        return 1;
+    else if(n%2 == 0)
+        return po((x*x)%M,n/2);
+    else
+        return (x*po((x*x)%M,(n-1)/2))%M;
+
+}
+int main() {
+    ll t;
+    cin>>t;
+    while(t--)
+    {
+        int n,m,k;
+        cin>>n>>m>>k;
+        ll d=(m-1)+(k-1)*(m-2);
+        if((n-1)%2==0)
+            d=po(d,(n-1)/2);
+        else
+        {
+            d=po(d,(n-2)/2);
+            d*=m-1;
+            d%=M;
+        }
+        d*=k;
+        d%=M;
+        cout<<d<<"\n";
+    }
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
+    return 0;
+}
